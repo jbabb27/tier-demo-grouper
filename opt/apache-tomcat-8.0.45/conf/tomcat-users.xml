@@ -1,0 +1,7 @@
+<tomcat-users>
+
+<role rolename="grouper_user"/>
+<user username="GrouperSystem" password="775b7daa99cbeedd8ddd779c9dea425cf321a83012d933426006e655af6c90f1$1$5877fb4af930106e9868866bb2322732d14a5f1fb74d2435b5bd918ff14e3199" roles="grouper_user"/>
+
+</tomcat-users>
+
