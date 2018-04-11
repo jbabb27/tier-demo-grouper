@@ -137,7 +137,7 @@ RUN set -x; \
   && echo "mysqladmin --silent --wait=30 ping || exit 1" >> /tmp/config \
   && echo "mysql -e 'CREATE DATABASE grouper CHARACTER SET utf8 COLLATE utf8_bin;'" >> /tmp/config \
   && echo "mysql -e \"CREATE USER 'grouper_usr'@'%' IDENTIFIED BY PASSWORD '*B105FBAE56580990DB9E95321F31D66069A26018';\"" >> /tmp/config \
-  && echo "mysql -e 'GRANT ALL PRIVILEGES ON GROUPER.* TO \"grouper_usr\"@\"%\" WITH GRANT OPTION;'" >> /tmp/config \
+  && echo "mysql -e 'GRANT ALL PRIVILEGES ON *.* TO \"grouper_usr\"@\"%\" WITH GRANT OPTION;'" >> /tmp/config \
   && bash /tmp/config \
   && rm -f /tmp/config \
 

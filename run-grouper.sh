@@ -13,7 +13,7 @@ set -x
 mysqld_safe &
 
 # Is MySQL available?
-until nc -vz tier-demo-mysql 3306
+until nc -vz localhost 3306
 do
         echo "MySQL is unavailable - sleeping"
         sleep 1
