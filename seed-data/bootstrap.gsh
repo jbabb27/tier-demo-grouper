@@ -27,6 +27,24 @@ shibAttrDef.setMultiValued(true);
 shibAttrDef.store();
 shibAttr = attrStem.addChildAttributeDefName(shibAttrDef, "ShibEntityId", "ShibEntityId");
 
+###LOADER###
+addStem("basis","courses","courses");
+
+addGroup("etc:loader","coursesLoader", "Course Loader");
+groupAddType("etc:loader:coursesLoader", "grouperLoader");
+setGroupAttr("etc:loader:coursesLoader", "grouperLoaderDbName", "grouper");
+setGroupAttr("etc:loader:coursesLoader", "grouperLoaderType", "SQL_GROUP_LIST");
+setGroupAttr("etc:loader:coursesLoader", "grouperLoaderScheduleType", "CRON");
+setGroupAttr("etc:loader:coursesLoader", "grouperLoaderQuartzCron", "*/10 * * * * ?");
+setGroupAttr("etc:loader:coursesLoader", "grouperLoaderQuery", "select distinct uid as SUBJECT_ID, CONCAT('basis:courses:', course_number) as GROUP_NAME from tier_demo_sis_dev.courses_users, tier_demo_sis_dev.courses, tier_demo_sis_dev.users where courses_users.course_id = courses.id and courses_users.user_id = users.id");
+# this handles removing members from groups that fall out of population from query above.
+setGroupAttr("etc:loader:coursesLoader", "grouperLoaderGroupsLike", "basis:courses:%");
+
+# give some time for the loader to run
+Thread.sleep(60000);
+
+###APPS###
+
 # Canvas Users
 # Canvas is only open to CS students
 addStem("app","canvas","canvas");
