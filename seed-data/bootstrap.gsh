@@ -32,7 +32,7 @@ addStem("basis","courses","courses");
 
 addGroup("etc:loader","coursesLoader", "Course Loader");
 groupAddType("etc:loader:coursesLoader", "grouperLoader");
-setGroupAttr("etc:loader:coursesLoader", "grouperLoaderDbName", "grouper");
+setGroupAttr("etc:loader:coursesLoader", "grouperLoaderDbName", "sis");
 setGroupAttr("etc:loader:coursesLoader", "grouperLoaderType", "SQL_GROUP_LIST");
 setGroupAttr("etc:loader:coursesLoader", "grouperLoaderScheduleType", "CRON");
 setGroupAttr("etc:loader:coursesLoader", "grouperLoaderQuartzCron", "*/10 * * * * ?");
