@@ -40,8 +40,25 @@ setGroupAttr("etc:loader:coursesLoader", "grouperLoaderQuery", "select distinct 
 # this handles removing members from groups that fall out of population from query above.
 setGroupAttr("etc:loader:coursesLoader", "grouperLoaderGroupsLike", "basis:courses:%");
 
-# give some time for the loader to run
-Thread.sleep(60000);
+
+addStem("basis","hr","hr");
+addGroup("etc:loader","hrLoader", "HR Loader");
+groupAddType("etc:loader:hrLoader", "grouperLoader");
+setGroupAttr("etc:loader:hrLoader", "grouperLoaderDbName", "sis");
+setGroupAttr("etc:loader:hrLoader", "grouperLoaderType", "SQL_GROUP_LIST");
+setGroupAttr("etc:loader:hrLoader", "grouperLoaderScheduleType", "CRON");
+setGroupAttr("etc:loader:hrLoader", "grouperLoaderQuartzCron", "*/10 * * * * ?");
+setGroupAttr("etc:loader:hrLoader", "grouperLoaderQuery", "select employeeId subject_id, concat('basis:hr:TIERHR|JOB|', COALESCE(jobtitlecode,'NONE')) group_name from sentrifugo.main_users left join sentrifugo.main_jobtitles on main_users.jobtitle_id = main_jobtitles.id");
+
+
+# Run the loaders
+loaderGroup = GroupFinder.findByName(grouperSession, "etc:loader:hrLoader");
+loaderRunOneJob(loaderGroup);
+
+loaderGroup = GroupFinder.findByName(grouperSession, "etc:loader:coursesLoader");
+loaderRunOneJob(loaderGroup);
+
+# TODO: auto-loaded reference / rollup groups?
 
 ###APPS###
 
